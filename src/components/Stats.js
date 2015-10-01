@@ -1,10 +1,8 @@
 import React from 'react'
-import gearRatio from '../lib/gearRatio'
-import gainRatio from '../lib/gainRatio'
-import gearInches from '../lib/gearInches'
-import development from '../lib/development'
-import skidPatches from '../lib/skidPatches'
 import Stat from './Stat'
+import {
+  gearRatio, gainRatio, gearInches, development, skidpatches, speed
+} from 'bicycle-tools/formulas'
 
 export default class Stats extends React.Component {
   constructor(props) {
@@ -14,7 +12,8 @@ export default class Stats extends React.Component {
       gainRatio: gainRatio(this.props.gearing),
       gearInches: gearInches(this.props.gearing),
       development: development(this.props.gearing),
-      skidpatches: skidPatches(this.props.gearing),
+      skidpatches: skidpatches(this.props.gearing),
+      speed: speed(this.props.gearing),
     }
   }
 
@@ -23,7 +22,8 @@ export default class Stats extends React.Component {
       gearRatio: gearRatio(nextProps.gearing),
       gainRatio: gainRatio(nextProps.gearing),
       gearInches: gearInches(nextProps.gearing),
-      skidpatches: skidPatches(nextProps.gearing),
+      skidpatches: skidpatches(nextProps.gearing),
+      speed: speed(nextProps.gearing),
     })
   }
 
@@ -49,6 +49,10 @@ export default class Stats extends React.Component {
 
           <div className="col-sm-2">
             <Stat label="Skid Patches" value={this.state.skidpatches} />
+          </div>
+
+          <div className="col-sm-2">
+            <Stat label="Speed @ 90RPM" value={this.state.speed} unit="m/s" />
           </div>
         </div>
       </div>

@@ -1,6 +1,5 @@
 import React from 'react'
-import mapValues from '../lib/mapValues'
-import crankSizes from '../sizing/crank'
+import sizes from 'bicycle-tools/sizes'
 
 export default class Picker extends React.Component {
   constructor(props) {
@@ -11,38 +10,56 @@ export default class Picker extends React.Component {
     return (
       <div>
         <form className="">
-          <div className="form-group col-sm-4">
+          <div className="form-group col-sm-3">
             <label>Chainring</label>
             <select name="chainring"
               className="form-control c-select"
               value={this.props.gearing.chainring}
               onChange={this.props.onChange}>
-              {mapValues(20, 64).map((i) => {
-                return <option value={i}>{i}T</option>
+              {sizes.chainrings.map((i) => {
+                return <option value={i[0]}>{i[1]}</option>
               })}
             </select>
           </div>
 
-          <div className="form-group col-sm-4">
+          <div className="form-group col-sm-3">
             <label>Cog</label>
             <select name="cog"
               value={this.props.gearing.cog}
               className="form-control c-select"
               onChange={this.props.onChange}>
-              {mapValues(8, 36).map((i) => {
-                return <option value={i}>{i}T</option>
+              {sizes.cogs.map((i) => {
+                return <option value={i[0]}>{i[1]}</option>
               })}
             </select>
           </div>
 
-          <div className="form-group col-sm-4">
+          <div className="form-group col-sm-3">
             <label>Crank length</label>
             <select name="crank"
               value={this.props.gearing.crank}
               className="form-control c-select"
               onChange={this.props.onChange}>
-              {crankSizes.map((i) => {
-                return <option value={i}>{i}mm</option>
+              {sizes.cranks.map((i) => {
+                return <option value={i[0]}>{i[1]}</option>
+              })}
+            </select>
+          </div>
+
+          <div className="form-group col-sm-3">
+            <label>Wheel size</label>
+            <select name="wheel"
+              value={this.props.gearing.wheel}
+              className="form-control c-select"
+              onChange={this.props.onChange}>
+              {sizes.wheels.map((group) => {
+                return (
+                  <optgroup label={group[0]}>
+                    {group[1].map((i) => {
+                      return <option value={i[0]}>{i[1]}</option>
+                    })}
+                  </optgroup>
+                )
               })}
             </select>
           </div>

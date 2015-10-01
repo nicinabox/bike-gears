@@ -10,7 +10,8 @@ export default class App extends React.Component {
         chainring: 46,
         cog: 16,
         crank: 165,
-        wheel_diameter_inches: 27,
+        wheel: 622,
+        cadence: 90,
       }
     }
 
