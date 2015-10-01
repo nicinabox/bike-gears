@@ -4,27 +4,25 @@ import {
   gearRatio, gainRatio, gearInches, development, skidpatches, speed
 } from 'bicycle-tools/formulas'
 
+var getState = (gearing) => {
+  return {
+    gearRatio: gearRatio(gearing),
+    gainRatio: gainRatio(gearing),
+    gearInches: gearInches(gearing),
+    development: development(gearing),
+    skidpatches: skidpatches(gearing),
+    speed: speed(gearing),
+  }
+}
+
 export default class Stats extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      gearRatio: gearRatio(this.props.gearing),
-      gainRatio: gainRatio(this.props.gearing),
-      gearInches: gearInches(this.props.gearing),
-      development: development(this.props.gearing),
-      skidpatches: skidpatches(this.props.gearing),
-      speed: speed(this.props.gearing),
-    }
+    this.state = getState(this.props.gearing)
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      gearRatio: gearRatio(nextProps.gearing),
-      gainRatio: gainRatio(nextProps.gearing),
-      gearInches: gearInches(nextProps.gearing),
-      skidpatches: skidpatches(nextProps.gearing),
-      speed: speed(nextProps.gearing),
-    })
+    this.setState(getState(nextProps.gearing))
   }
 
   render() {
@@ -52,7 +50,7 @@ export default class Stats extends React.Component {
           </div>
 
           <div className="col-sm-2">
-            <Stat label="Speed @ 90RPM" value={this.state.speed} unit="m/s" />
+            <Stat label={`Speed @ ${this.props.gearing.cadence}RPM`} value={this.state.speed} unit="m/s" />
           </div>
         </div>
       </div>

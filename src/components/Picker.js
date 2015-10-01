@@ -63,6 +63,14 @@ export default class Picker extends React.Component {
               })}
             </select>
           </div>
+
+          <div className="form-group col-sm-3">
+            <label>Cadence (RPM)</label>
+            <input name="cadence"
+              className="form-control"
+              value={this.props.gearing.cadence}
+              onChange={this.props.onChange} />
+          </div>
         </form>
       </div>
     )
